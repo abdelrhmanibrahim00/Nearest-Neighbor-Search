@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- TextView to prompt for MAC address -->
+        <TextView
+            android:id="@+id/textview_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please enter the MAC address:"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- EditText for user input -->
+        <EditText
+            android:id="@+id/editTextMacAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="MAC Address"
+            app:layout_constraintTop_toBottomOf="@id/textview_prompt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Button to submit the MAC address -->
+        <Button
+            android:id="@+id/button_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter"
+            app:layout_constraintTop_toBottomOf="@id/editTextMacAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/textview_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="This app helps you track and analyze signal strength data, compute the nearest neighbor based on signal strength and location, and view routes on a map. You can manage your profile, view signal histories, and edit signal entries. The app saves data locally and loads map data from an external source, ensuring smooth navigation and access, even offline"
+            app:layout_constraintTop_toBottomOf="@id/button_enter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

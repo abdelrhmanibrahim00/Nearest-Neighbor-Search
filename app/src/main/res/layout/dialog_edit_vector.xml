@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextX"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter X value" />
+
+    <EditText
+        android:id="@+id/editTextY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Y value" />
+
+    <EditText
+        android:id="@+id/editTextZ"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Z value" />
+</LinearLayout>
