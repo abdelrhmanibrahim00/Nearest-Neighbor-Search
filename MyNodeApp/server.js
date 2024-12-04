@@ -47,7 +47,7 @@ app.get('/api/allCoordinates', (req, res) => {
             console.error('Error executing query:', err);
             res.status(500).json({ error: 'Database query failed' });
             return;
-        }
+        } 
         console.log('Fetched all coordinates data:', results);  // Debugging log
         res.json(results);
     });

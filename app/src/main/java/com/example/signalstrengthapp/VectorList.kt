@@ -5,13 +5,13 @@ import android.os.Parcelable
 
 data class VectorList(
     val title: String,
-    val vectors: MutableList<Vector>,
+    val vectors: MutableList<Vectors>,
     var isExpanded: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
-        mutableListOf<Vector>().apply {
-            parcel.readList(this as List<*>, Vector::class.java.classLoader)
+        mutableListOf<Vectors>().apply {
+            parcel.readList(this as List<*>, Vectors::class.java.classLoader)
         },
         parcel.readByte() != 0.toByte()
     )

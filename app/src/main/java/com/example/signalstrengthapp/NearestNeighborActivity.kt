@@ -1,6 +1,7 @@
 package com.example.signalstrengthapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class NearestNeighborActivity : AppCompatActivity() {
     private lateinit var connectionStatusTextView: TextView
     private lateinit var mapView: MapView
     private lateinit var nearestNeighbors: List<Metavimai>
+    private lateinit var vectors: List<Vectors> // Added to fix the unresolved reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +30,14 @@ class NearestNeighborActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         mapView = findViewById(R.id.mapView)
+
+        // Initialize `vectors` from the intent
+        vectors = intent.getParcelableArrayListExtra("vectors") ?: emptyList()
+        if (vectors.isNotEmpty()) {
+            Log.d("NearestNeighborActivity", "Received Vectors: $vectors")
+        } else {
+            connectionStatusTextView.text = "No vectors received for computation."
+        }
 
         // Check database connection and calculate nearest neighbors
         checkDatabaseConnection()
@@ -89,8 +99,8 @@ class NearestNeighborActivity : AppCompatActivity() {
         // Group `stiprumai` entries by `matavimas` to get each set of three coordinates
         val groupedStiprumai = allStiprumai.groupBy { it.matavimas }
 
-        for (vectorList in VectorData.vectorLists) {
-            val referencePoint = vectorList.vectors[0] // Reference vector from the app's list
+        for (vector in vectors) { // Fixed reference to `vectors`
+            val referencePoint = vector
 
             // For each `matavimas`, get the closest match based on distance calculation
             val nearest = groupedStiprumai.minByOrNull { (matavimas, entries) ->
@@ -112,7 +122,7 @@ class NearestNeighborActivity : AppCompatActivity() {
         return nearestNeighborsList
     }
 
-    private fun calculateDistance(referencePoint: Vector, coordinates: List<Int>): Float {
+    private fun calculateDistance(referencePoint: Vectors, coordinates: List<Int>): Float {
         val dx = referencePoint.x - coordinates[0]
         val dy = referencePoint.y - coordinates[1]
         val dz = referencePoint.z - coordinates[2]
@@ -120,11 +130,21 @@ class NearestNeighborActivity : AppCompatActivity() {
     }
 
     private fun displayOnMap() {
+        if (nearestNeighbors.isEmpty()) return
+
+        // Calculate dynamic axis ranges
+        val minX = nearestNeighbors.minOf { it.x }
+        val maxX = nearestNeighbors.maxOf { it.x }
+        val minY = nearestNeighbors.minOf { it.y }
+        val maxY = nearestNeighbors.maxOf { it.y }
+
         // Convert nearest neighbors to `StrengthPoint` list with labels
         val labeledCoordinates = nearestNeighbors.mapIndexed { index, neighbor ->
             "List ${index + 1}" to StrengthPoint(neighbor.matavimas, neighbor.x, neighbor.y)
         }
 
         mapView.coordinates = labeledCoordinates
+        mapView.setAxisRanges(minX, maxX, minY, maxY) // Pass axis ranges to MapView
     }
+
 }

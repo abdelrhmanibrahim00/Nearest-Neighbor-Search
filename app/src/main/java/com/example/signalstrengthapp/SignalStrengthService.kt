@@ -65,8 +65,8 @@ interface MatavimaiDao {
     fun getCoordinatesByMatavimasId(matavimasId: Int): Metavimai?
 }
 
-@Database(entities = [Stiprumai::class, Metavimai::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun stiprumaiDao(): StiprumaiDao
-    abstract fun matavimaiDao(): MatavimaiDao
-}
+//@Database(entities = [Stiprumai::class, Metavimai::class], version = 1)
+//abstract class AppDatabase : RoomDatabase() {
+//    abstract fun stiprumaiDao(): StiprumaiDao
+//    abstract fun matavimaiDao(): MatavimaiDao
+//}

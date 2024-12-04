@@ -44,12 +44,27 @@ class MapView @JvmOverloads constructor(
         isAntiAlias = true
     }
 
+    // Dynamic axis ranges
+    private var xMin: Int = -10
+    private var xMax: Int = 10
+    private var yMin: Int = -35
+    private var yMax: Int = 35
+
     // List to hold points with labels
     var coordinates: List<Pair<String, StrengthPoint>> = emptyList()
         set(value) {
             field = value
             invalidate() // Redraw the view when data changes
         }
+
+    // Method to set dynamic axis ranges
+    fun setAxisRanges(xMin: Int, xMax: Int, yMin: Int, yMax: Int) {
+        this.xMin = xMin
+        this.xMax = xMax
+        this.yMin = yMin
+        this.yMax = yMax
+        invalidate() // Redraw the view when ranges change
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -59,35 +74,42 @@ class MapView @JvmOverloads constructor(
 
     private fun drawGrid(canvas: Canvas) {
         val padding = 100f
-        val xRange = 20
-        val yRange = 70
+        val xRange = xMax - xMin
+        val yRange = yMax - yMin
         val xStep = (width - 2 * padding) / xRange
         val yStep = (height - 2 * padding) / yRange
 
-        for (i in -10..10) {
-            val x = padding + (i + 10) * xStep
+        // Draw vertical grid lines and X-axis labels
+        for (i in xMin..xMax) {
+            val x = padding + (i - xMin) * xStep
             canvas.drawLine(x, padding, x, height - padding, gridPaint)
             canvas.drawText(i.toString(), x, height - padding + 30f, axisPaint)
         }
 
-        for (j in -35..35 step 5) {
-            val y = height - padding - (j + 35) * yStep
+        // Draw horizontal grid lines and Y-axis labels
+        for (j in yMin..yMax) {
+            val y = height - padding - (j - yMin) * yStep
             canvas.drawLine(padding, y, width - padding, y, gridPaint)
             if (j != 0) canvas.drawText(j.toString(), padding - 50f, y + 10f, axisPaint)
         }
 
-        canvas.drawLine(padding, height / 2f, width - padding, height / 2f, axisPaint)
-        canvas.drawLine(width / 2f, padding, width / 2f, height - padding, axisPaint)
+        // Draw X and Y axes
+        val centerX = padding + (0 - xMin) * xStep
+        val centerY = height - padding - (0 - yMin) * yStep
+        canvas.drawLine(padding, centerY, width - padding, centerY, axisPaint) // X-axis
+        canvas.drawLine(centerX, padding, centerX, height - padding, axisPaint) // Y-axis
     }
 
     private fun drawCoordinates(canvas: Canvas) {
         val padding = 100f
-        val xStep = (width - 2 * padding) / 20
-        val yStep = (height - 2 * padding) / 70
+        val xRange = xMax - xMin
+        val yRange = yMax - yMin
+        val xStep = (width - 2 * padding) / xRange
+        val yStep = (height - 2 * padding) / yRange
 
         coordinates.forEach { (label, point) ->
-            val x = padding + (point.x + 10) * xStep
-            val y = height - padding - (point.y + 35) * yStep
+            val x = padding + (point.x - xMin) * xStep
+            val y = height - padding - (point.y - yMin) * yStep
             canvas.drawCircle(x, y, 10f, pointPaint)
             canvas.drawText(label, x + 15f, y, textPaint) // Label each point by list name
         }
