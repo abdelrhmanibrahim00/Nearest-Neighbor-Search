@@ -1,27 +1,18 @@
-<span style="font-size: 2em;">Signal Strength App Overview</span>
+Signal Strength App Overview
+Signal Strength App is an integrated solution for collecting, analyzing, and visualizing signal strength data. It combines a Node.js backend, MySQL database, Retrofit for network communication, and Android’s Room database for local data storage.
 
-Signal Strength App is an integrated solution that utilizes Node.js, MySQL, Retrofit, and Android's Room database to collect, analyze, and visualize signal strength data. It consists of a backend server for handling API requests, and an Android application to interact with the data.
-
-Features
-Node.js backend with Express and MySQL for data storage and API endpoints
-
-Android application with activities and fragments for user interaction
-
-Room database integration for local storage on Android
-
-Retrofit for network communication between the Android app and backend
-
-Custom MapView for visualizing coordinates and signal strengths
-
-Nearest neighbor computation for signal data analysis
-
+Features:
+Node.js Backend with Express and MySQL to store and manage data.
+Android Application with activities and fragments for user interaction.
+Room Database integration for local storage on Android.
+Retrofit for seamless communication between the Android app and the backend server.
+Custom MapView for visualizing coordinates and signal strengths on the map.
+Nearest Neighbor Computation to analyze signal strength data for optimal routing or positioning.
 Backend (Node.js + MySQL)
-Prerequisites
+Prerequisites:
 Node.js
-
 MySQL
-
-Setup
+Setup:
 1- Install the necessary dependencies:
      npm install express mysql
 
