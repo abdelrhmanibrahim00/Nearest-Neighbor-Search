@@ -1,5 +1,6 @@
-Signal Strength App
-Overview
+Signal Strength App Overview
+
+
 Signal Strength App is an integrated solution that utilizes Node.js, MySQL, Retrofit, and Android's Room database to collect, analyze, and visualize signal strength data. It consists of a backend server for handling API requests, and an Android application to interact with the data.
 
 Features
