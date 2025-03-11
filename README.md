@@ -27,6 +27,7 @@ Setup
 1- Install the necessary dependencies:
      npm install express mysql
 
+
 2- Configure the MySQL connection in index.js:
   const db = mysql.createConnection({
     host: 'seklys.ila.lt',
@@ -35,8 +36,10 @@ Setup
     database: 'LDB'
 });
 
+
 3-Start the Node.js server:
 node index.js
+
 
 Endpoints
 Root Route: /
@@ -66,8 +69,10 @@ Setup
 implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
 2- Configure Retrofit in Connector.kt:
 private const val BASE_URL = "http://10.151.5.144:3000/"
+
 3- Define API interface in SignalStrengthService.kt:
 interface SignalStrengthService {
     @GET("api/signalStrength")
@@ -79,6 +84,7 @@ interface SignalStrengthService {
     @GET("api/getCoordinates/{matavimasId}")
     suspend fun getCoordinatesForMetavimasId(@Path("matavimasId") metavimasId: Int): Metavimai?
 }
+
 
 Activities and Fragments
 MainActivity: Entry point of the app with navigation setup.
@@ -131,6 +137,7 @@ Adapter
 VectorAdapter: Adapter for displaying vectors in a RecyclerView with edit functionality.
 
 How to Use
+
 1- Set up the Node.js backend and ensure it is running.
 
 2- Install and configure the Android application.
